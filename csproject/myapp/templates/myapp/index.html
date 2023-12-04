@@ -1,5 +1,7 @@
 <h1>Polls</h1>
 
+<a href="{% url 'myapp:detail' question.id %}"><h2>Start poll</h2></a>
+
 {% if latest_question_list %}
     <ul>
     {% for question in latest_question_list %}

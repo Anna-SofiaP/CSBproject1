@@ -8,22 +8,42 @@ from django.views import generic
 from .models import Question, Choice
 
 
-class IndexView(generic.ListView):
-    template_name = 'myapp/index.html'
-    context_object_name = 'latest_question_list'
+#class IndexView(generic.ListView):
+    #template_name = 'myapp/index.html'
+    #context_object_name = 'latest_question_list'
 
-    def get_queryset(self):
-        """Return the last five published questions."""
-        return Question.objects.order_by('-pub_date')[:5]
+    #def get_queryset(self):
+        #"""Return the last five published questions."""
+        #return Question.objects.order_by('-pub_date')[:5]
+
+def indexView(request):
+    question = get_object_or_404(Question, pk=1)
+    context = { 
+        'question' : question, 
+    }
+    return render(request, 'myapp/index.html', context)
 
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'myapp/detail.html'
 
+#class ResultsView(generic.DetailView):
+    #model = Question
+    #template_name = 'myapp/results.html'
 
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = 'myapp/results.html'
+def resultsView(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+
+    # Get the next question
+    next_question = Question.objects.filter(id__gt=question_id).order_by('id').first()
+
+    context = {
+        'question': question,
+        'next_question': next_question,
+    }
+
+    return render(request, 'myapp/results.html', context)
+
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)

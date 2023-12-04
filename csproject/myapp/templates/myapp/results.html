@@ -7,3 +7,6 @@
 </ul>
 
 <a href="{% url 'myapp:detail' question.id %}">Vote again?</a>
+{% if next_question %}
+    <a href="{% url 'myapp:detail' next_question.id %}">Next question</a>
+{% endif %}
