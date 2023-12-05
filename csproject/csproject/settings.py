@@ -55,7 +55,7 @@ ROOT_URLCONF = 'csproject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -69,6 +69,10 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'csproject.wsgi.application'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+SESSION_COOKIE_SAMESITE = None
 
 
 # Database
