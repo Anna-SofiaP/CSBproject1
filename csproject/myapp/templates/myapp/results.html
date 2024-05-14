@@ -3,4 +3,6 @@
 
 {% if next_question %}
     <a href="{% url 'myapp:detail' next_question.id %}">Next question</a>
+{% else %}
+    <a href="{% url 'myapp:endpage' %}">Show the results</a>
 {% endif %}

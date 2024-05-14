@@ -16,6 +16,7 @@ class Answer(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
     answer_date = models.DateTimeField(auto_now_add=True)
+    amount = models.IntegerField(default=0)
 
     def __str__(self):
         return f"{self.user.username}'s answer to {self.question.question_text}: {self.choice_text}"

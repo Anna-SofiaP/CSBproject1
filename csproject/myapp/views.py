@@ -35,6 +35,7 @@ class DetailView(generic.DetailView):
     #model = Question
     #template_name = 'myapp/results.html'
 
+@login_required
 def resultsView(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
 
@@ -49,6 +50,7 @@ def resultsView(request, question_id):
     return render(request, 'myapp/results.html', context)
 
 
+@login_required
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -60,11 +62,15 @@ def vote(request, question_id):
             'error_message': "You didn't select a choice.",
         })
     else:
-        selected_choice.save()
-        #selected_choice.votes += 1
         #selected_choice.save()
+        selected_choice.amount += 1
+        selected_choice.save()
 
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse('myapp:results', args=(question.id)))
+        return HttpResponseRedirect(reverse('myapp:results', args=(question.id,)))
+
+@login_required 
+def endView(request):
+    return render(request, 'myapp/end.html')

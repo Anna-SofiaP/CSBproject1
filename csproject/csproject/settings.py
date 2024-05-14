@@ -70,8 +70,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'csproject.wsgi.application'
 
-LOGIN_URL = '/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = ''
+LOGIN_REDIRECT_URL = '/home/'
+#LOGIN_URL = '/login/'
+#LOGIN_REDIRECT_URL = '/'
 SESSION_COOKIE_SAMESITE = None
 
 
