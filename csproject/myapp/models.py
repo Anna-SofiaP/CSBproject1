@@ -19,7 +19,7 @@ class Answer(models.Model):
     amount = models.IntegerField(default=0)
 
     def __str__(self):
-        return f"{self.user.username}'s answer to {self.question.question_text}: {self.choice_text}"
+        return self.choice_text
 
     
 #votes = models.IntegerField(default=0)

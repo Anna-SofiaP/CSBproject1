@@ -17,13 +17,13 @@ from .models import Question, Answer
         #"""Return the last five published questions."""
         #return Question.objects.order_by('-pub_date')[:5]
 
-
+resultslist = []
 
 @login_required
 def indexView(request):
-    question = get_object_or_404(Question, pk=1)
+    question = get_object_or_404(Question, pk=4)
     context = { 
-        'question' : question, 
+        'question' : question,
     }
     return render(request, 'myapp/index.html', context)
 
@@ -35,7 +35,7 @@ class DetailView(generic.DetailView):
     #model = Question
     #template_name = 'myapp/results.html'
 
-@login_required
+#@login_required
 def resultsView(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
 
@@ -50,11 +50,12 @@ def resultsView(request, question_id):
     return render(request, 'myapp/results.html', context)
 
 
-@login_required
+#@login_required
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
         selected_choice = question.answer_set.get(pk=request.POST['answer'])
+        resultslist.append(selected_choice)
     except (KeyError, Answer.DoesNotExist):
         # Redisplay the question voting form.
         return render(request, 'myapp/detail.html', {
@@ -71,6 +72,18 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('myapp:results', args=(question.id,)))
 
-@login_required 
+#@login_required 
 def endView(request):
-    return render(request, 'myapp/end.html')
+    latest_question_list = Question.objects.all()
+    #combined_list = zip(latest_question_list, resultslist)
+    combined_list = []
+
+    for question, answer in zip(latest_question_list, resultslist):
+        combined_list.append((question, answer))
+        
+    context = {
+        #'latest_question_list': latest_question_list,
+        #'resultslist': resultslist,
+        'combined_list': combined_list,
+    }
+    return render(request, 'myapp/end.html', context)
