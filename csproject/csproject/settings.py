@@ -48,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'myapp.middleware.LogoutTimeoutMiddleware',
 ]
 
 ROOT_URLCONF = 'csproject.urls'
@@ -75,6 +76,8 @@ LOGIN_REDIRECT_URL = '/home/'
 #LOGIN_URL = '/login/'
 #LOGIN_REDIRECT_URL = '/'
 SESSION_COOKIE_SAMESITE = None
+
+SESSION_TIMEOUT = 10  # Session timeout duration in seconds
 
 
 # Database
