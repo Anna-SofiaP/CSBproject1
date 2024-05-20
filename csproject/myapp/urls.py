@@ -14,4 +14,5 @@ urlpatterns = [
     path('<int:question_id>/results/', views.resultsView, name='results'),
     path('<int:question_id>/vote/', views.vote, name='vote'),
     path('end/', views.endView, name='endpage'),
+    path('timeout/', views.timeoutView, name='timeout'),
 ]

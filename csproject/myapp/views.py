@@ -87,3 +87,6 @@ def endView(request):
         'combined_list': combined_list,
     }
     return render(request, 'myapp/end.html', context)
+
+def timeoutView(request):
+    return render(request, 'myapp/timeout.html')

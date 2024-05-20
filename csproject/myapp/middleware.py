@@ -13,9 +13,10 @@ class LogoutTimeoutMiddleware:
         #if request.user.is_authenticated and request.session.get_expiry_age():
         if request.user.is_authenticated:
             if request.session.get_expiry_age() <= 0:
-                logout(request)
+                logout(request, 'myapp/login.html')
                 #return HttpResponseRedirect(reverse('myapp:login'))
-                return HttpResponseRedirect('/')
+                #return HttpResponseRedirect(reverse('myapp:timeout'))
+                #return
 
         response = self.get_response(request)
         return response
