@@ -92,7 +92,7 @@ def endView(request):
 
 class PasswordsChangingView(PasswordChangeView):
     form_class = PasswordChangeForm
-    success_url = reverse_lazy('home')
+    success_url = reverse_lazy('myapp:index')
 
 
 #def timeoutView(request):
