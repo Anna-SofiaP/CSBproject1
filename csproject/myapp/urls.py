@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView, LogoutView
@@ -14,5 +14,7 @@ urlpatterns = [
     path('<int:question_id>/results/', views.resultsView, name='results'),
     path('<int:question_id>/vote/', views.vote, name='vote'),
     path('end/', views.endView, name='endpage'),
-    path('timeout/', views.timeoutView, name='timeout'),
+    #path('timeout/', views.timeoutView, name='timeout'),
+    #path('password/', auth_views.PasswordChangeView.as_view(template_name='myapp/password-change.html'), name='password'),
+    path('password/', views.PasswordsChangingView.as_view(template_name='myapp/password-change.html'), name='password'),
 ]

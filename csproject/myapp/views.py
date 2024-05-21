@@ -3,7 +3,9 @@ from django.template import loader
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.contrib.auth.decorators import login_required
-from django.urls import reverse
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.forms import PasswordChangeForm
+from django.urls import reverse, reverse_lazy
 from django.views import generic
 
 from .models import Question, Answer
@@ -88,5 +90,10 @@ def endView(request):
     }
     return render(request, 'myapp/end.html', context)
 
-def timeoutView(request):
-    return render(request, 'myapp/timeout.html')
+class PasswordsChangingView(PasswordChangeView):
+    form_class = PasswordChangeForm
+    success_url = reverse_lazy('home')
+
+
+#def timeoutView(request):
+#    return render(request, 'myapp/timeout.html')
