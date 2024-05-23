@@ -29,13 +29,11 @@ def indexView(request):
     }
     return render(request, 'myapp/index.html', context)
 
+
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'myapp/detail.html'
 
-#class ResultsView(generic.DetailView):
-    #model = Question
-    #template_name = 'myapp/results.html'
 
 #@login_required
 def resultsView(request, question_id):
@@ -74,6 +72,7 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('myapp:results', args=(question.id,)))
 
+
 #@login_required 
 def endView(request):
     latest_question_list = Question.objects.all()
@@ -90,10 +89,7 @@ def endView(request):
     }
     return render(request, 'myapp/end.html', context)
 
+
 class PasswordsChangingView(PasswordChangeView):
     form_class = PasswordChangeForm
     success_url = reverse_lazy('myapp:index')
-
-
-#def timeoutView(request):
-#    return render(request, 'myapp/timeout.html')

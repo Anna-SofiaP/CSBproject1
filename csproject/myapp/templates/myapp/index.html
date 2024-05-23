@@ -1,4 +1,4 @@
-<h1>Polls</h1>
+<h1>Hello {{ user.get_username | safe }}! Welcome to daily questions!</h1>
 
 <a href="{% url 'myapp:detail' question.id %}"><h2>Start poll</h2></a>
 
