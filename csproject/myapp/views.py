@@ -75,17 +75,18 @@ def vote(request, question_id):
 
 #@login_required 
 def endView(request):
-    latest_question_list = Question.objects.all()
+    question_list = Question.objects.all()
+    answer_list = Answer.objects.all()
     #combined_list = zip(latest_question_list, resultslist)
     combined_list = []
 
-    for question, answer in zip(latest_question_list, resultslist):
+    for question, answer in zip(question_list, resultslist):
         combined_list.append((question, answer))
         
     context = {
-        #'latest_question_list': latest_question_list,
-        #'resultslist': resultslist,
         'combined_list': combined_list,
+        'answer_list': answer_list,
+        'question_list': question_list,
     }
     return render(request, 'myapp/end.html', context)
 

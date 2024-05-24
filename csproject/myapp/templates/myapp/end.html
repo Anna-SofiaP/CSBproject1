@@ -1,15 +1,18 @@
-<h1>End of the poll</h1>
+<h1>End of the daily questions</h1>
 
 <h2>Here are your results:</h2>
-{% if combined_list %}
-{% for question, answer in combined_list %}
+{% if question_list %}
+{% for question in question_list %}
 {{ question.question_text }}
+{% for answer in answer_list %}
+{% if question == answer.question %}
     <ul>
-        <li>Your answer: {{ answer }}</li>
+        <li>{{ answer.choice_text }}: answered {{ answer.amount }} times</li>
     </ul>
+{% endif %}
 {% endfor %}
-{% else %}
-    <p>You did not answer to any questions!</p>
+{% endfor %}
 {% endif %}
 
-<a href="{% url 'myapp:logout' %}">Log out</a>
+<a href="{% url 'myapp:logout' %}">Log out</a> </br>
+<a href="{% url 'myapp:index' %}">Back to main page</a>
